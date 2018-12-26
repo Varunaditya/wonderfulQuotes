@@ -14,7 +14,7 @@
 
 <style scoped>
   .panel-body {
-    text-align: center;
+    /*text-align: center;*/
     font-family: 'Arizonia', cursive;
     font-size: 24px;
     color: #6e6e6e;
