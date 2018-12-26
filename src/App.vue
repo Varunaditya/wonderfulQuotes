@@ -2,6 +2,11 @@
     <div class="container">
       <new-quote></new-quote>
       <quote-grid :quotes=quotes></quote-grid>
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="alert-info alert">Click on a quote to delete it.</div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -26,6 +31,9 @@
         created() {
           eventBus.$on('newQuoteAdded', (data) => {
             this.quotes.push(data);
+          });
+          eventBus.$on('quoteWasDeleted', (index) => {
+            this.quotes.splice(index, 1);
           });
         }
     }
