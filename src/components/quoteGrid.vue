@@ -17,7 +17,6 @@
     },
     methods: {
       deleteQuote(index) {
-        // console.log(index);
         eventBus.$emit('quoteWasDeleted', index);
       }
     }

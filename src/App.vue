@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+      <app-header :quotesCount=quotesNumber></app-header>
       <new-quote></new-quote>
       <quote-grid :quotes=quotes></quote-grid>
       <div class="row">
@@ -13,6 +14,7 @@
 <script>
     import quotegrid from './components/quoteGrid.vue';
     import newquote from './components/newQuote.vue';
+    import header from './components/header.vue';
     import { eventBus } from "./main";
     export default {
         data(){
@@ -21,20 +23,26 @@
               "If you want something to be done then do it yourself.",
               "You either die a hero or live long enough to see yourself becoming the villain."
             ],
-            maxQuotes: 10
+            quotesNumber: 2
           };
         },
         components: {
           quoteGrid: quotegrid,
-          newQuote: newquote
+          newQuote: newquote,
+          appHeader: header
         },
         created() {
           eventBus.$on('newQuoteAdded', (data) => {
-            this.quotes.push(data);
+            if(this.quotesNumber < 10){
+              this.quotes.push(data);
+              this.quotesNumber += 1;
+            }
           });
           eventBus.$on('quoteWasDeleted', (index) => {
             this.quotes.splice(index, 1);
+            this.quotesNumber -= 1;
           });
+
         }
     }
 </script>
